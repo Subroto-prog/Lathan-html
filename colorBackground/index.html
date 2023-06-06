@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Background Web</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="title">Pilih Warna</div>
+      <div class="box">
+        <div class="circle blue"></div>
+        <div class="circle red"></div>
+        <div class="circle green"></div>
+        <div class="circle black"></div>
+      </div>
+      <div class="button">
+        <div class="btn-reset">Reset Background</div>
+      </div>
+    </div>
+
+    <script>
+      // Get All Elemen with class
+      const circle = document.querySelectorAll(".circle");
+      const reset = document.querySelector(".btn-reset");
+      const title = document.querySelector(".title");
+
+      // Loop Array from circle variabel and give eventListener
+      circle.forEach((circle) => {
+        // Cara 1
+        // circle.addEventListener("click", (style) => {
+        //     // console.log(style)
+        //     const computedStyle = window.getComputedStyle(style.target)
+        //     console.log(computedStyle.backgroundColor)
+        //     document.body.style.backgroundColor = computedStyle.backgroundColor
+        // })
+
+        // Best Practice
+        // circle.addEventListener("click", ({target}) => {
+        //     // get style css from element with syntax getComputedStyle
+        //     const {backgroundColor} = getComputedStyle(target)
+        //     document.body.style.backgroundColor = backgroundColor
+        // })
+
+        // Case 3
+        circle.addEventListener("click", ({ target }) => {
+          const rgb = "rgb(51, 51, 51)";
+          const { backgroundColor } = getComputedStyle(target);
+
+          // Function to check validity of the color code
+          if (backgroundColor == rgb) {
+            title.style.color = "white";
+            document.body.style.backgroundColor = backgroundColor;
+          } else {
+            document.body.style.backgroundColor = backgroundColor;
+            title.style.color = null;
+          }
+        });
+      });
+
+      reset.addEventListener("click", () => {
+        // cara 1
+        // document.body.style.backgroundColor = "transparent"
+        // cara 2
+        document.body.style.backgroundColor = null;
+
+        title.style.color = null;
+      });
+    </script>
+  </body>
+</html>

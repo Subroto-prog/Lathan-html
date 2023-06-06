@@ -1,0 +1,2 @@
+Clear Color Button/Reset Color
+Move color Title if background Dark
